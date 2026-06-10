@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 Signs Your Nervous System Is Running the Show — The B.L.U.E. Method™</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f5f5f0;
+    color: #2b323e;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    line-height: 1.6;
+  }
+  .qwrap {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 2px 16px rgba(43,50,62,0.08);
+  }
+  .brand { font-size: 11px; font-weight: 600; color: #1D5E6C; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .q-title { font-size: 23px; font-weight: 700; color: #2b323e; line-height: 1.3; margin-bottom: 6px; font-family: Georgia, serif; }
+  .q-sub { font-size: 14px; color: #4a5568; line-height: 1.65; margin-bottom: 1.25rem; }
+  .progress-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.75rem; }
+  .progress-track { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
+  .progress-fill { height: 4px; background: #1D5E6C; border-radius: 2px; transition: width 0.4s ease; }
+  .progress-label { font-size: 12px; color: #718096; white-space: nowrap; }
+  .card-viewport { position: relative; min-height: 220px; margin-bottom: 1.25rem; overflow: hidden; }
+  .q-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+    position: absolute; top: 0; left: 0; right: 0;
+    opacity: 0; pointer-events: none;
+  }
+  .q-card.active { opacity: 1; pointer-events: all; transform: translateX(0); transition: opacity 0.28s ease, transform 0.28s ease; }
+  .q-num { font-size: 11px; font-weight: 700; color: #1D5E6C; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .q-text { font-size: 17px; color: #2b323e; line-height: 1.5; font-weight: 600; margin-bottom: 8px; font-family: Georgia, serif; }
+  .q-detail { font-size: 13px; color: #718096; line-height: 1.6; }
+  .answer-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+  .ans-btn {
+    padding: 13px 16px; border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    background: #ffffff;
+    color: #2b323e; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s; text-align: center;
+  }
+  .ans-btn:hover { border-color: #1D5E6C; background: #f0f9fb; }
+  .ans-btn.sel-yes { background: #E8F4F6; border-color: #1D5E6C; color: #1D5E6C; }
+  .ans-btn.sel-no { background: #f7fafc; border-color: #a0aec0; color: #4a5568; }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .nav-btn { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px 20px; font-size: 13px; cursor: pointer; color: #4a5568; transition: all 0.15s; }
+  .nav-btn:hover:not(:disabled) { border-color: #1D5E6C; color: #1D5E6C; }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .next-btn { background: #1D5E6C; color: white; border-color: #1D5E6C; font-size: 14px; padding: 10px 26px; font-weight: 600; }
+  .next-btn:hover:not(:disabled) { opacity: 0.88; }
+  .next-btn:disabled { background: #e2e8f0; border-color: #e2e8f0; color: #a0aec0; opacity: 1; cursor: not-allowed; }
+
+  .result-screen { display: none; }
+  .pattern-badge { display: inline-block; background: #E8F4F6; color: #1D5E6C; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; }
+  .result-head { font-size: 21px; font-weight: 700; color: #2b323e; margin-bottom: 10px; line-height: 1.3; font-family: Georgia, serif; }
+  .result-body { font-size: 15px; color: #4a5568; line-height: 1.7; margin-bottom: 1.25rem; }
+  .reframe { border-left: 3px solid #1D5E6C; padding: 1rem 1.25rem; font-size: 15px; font-style: italic; color: #2b323e; line-height: 1.65; margin: 1.5rem 0; background: #f0f9fb; }
+  .score-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin: 1.5rem 0; }
+  .score-pill { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 8px; text-align: center; }
+  .score-pill.dominant { background: #E8F4F6; border-color: #1D5E6C; }
+  .score-pill-label { font-size: 11px; color: #718096; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .score-pill.dominant .score-pill-label { color: #1D5E6C; font-weight: 700; }
+  .score-pill-num { font-size: 22px; font-weight: 700; color: #2b323e; font-family: Georgia, serif; }
+  .score-pill.dominant .score-pill-num { color: #1D5E6C; }
+  .wl-label { font-size: 13px; color: #718096; margin-bottom: 8px; margin-top: 1rem; }
+  .wl-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; color: #2b323e; line-height: 1.5; }
+  .wl-dot { width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: #1D5E6C; margin-top: 5px; }
+  .cta-wrap { background: #2b323e; border-radius: 14px; padding: 1.75rem 1.5rem; margin-top: 1.75rem; }
+  .cta-title { font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 8px; font-family: Georgia, serif; }
+  .cta-sub { font-size: 13px; color: #7aacb8; line-height: 1.6; margin-bottom: 14px; }
+  .cta-link { display: block; text-align: center; padding: 13px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; margin-bottom: 10px; transition: opacity 0.15s; }
+  .cta-link:hover { opacity: 0.88; }
+  .cta-primary { background: #73bfc0; color: #2b323e; }
+  .cta-secondary { background: #3e788a; color: #ffffff; }
+  .cta-tertiary { background: #4a5568; color: #ffffff; }
+  .retake-link { font-size: 13px; color: #7aacb8; cursor: pointer; margin-top: 14px; display: block; background: none; border: none; text-decoration: underline; width: 100%; text-align: center; }
+  .retake-link:hover { color: #73bfc0; }
+  .footer-brand { text-align: center; font-size: 12px; color: #a0aec0; margin-top: 1.5rem; letter-spacing: 0.5px; }
+
+  @media (max-width: 480px) {
+    body { padding: 1rem 0.5rem; }
+    .qwrap { padding: 1.75rem 1.25rem; border-radius: 12px; }
+    .q-title { font-size: 20px; }
+    .q-text { font-size: 15px; }
+    .answer-row { grid-template-columns: 1fr; }
+    .score-pill-label { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="qwrap">
+
+  <div id="quiz-screen">
+    <div class="brand">The B.L.U.E. Method™</div>
+    <h1 class="q-title">Is your nervous system running the show?</h1>
+    <p class="q-sub">One question at a time. There are no wrong answers — only honest ones.</p>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="pbar" style="width:0%"></div></div>
+      <span class="progress-label" id="prog-label">1 of 8</span>
+    </div>
+    <div class="card-viewport" id="card-viewport"></div>
+    <div class="answer-row">
+      <button class="ans-btn" id="btn-yes" onclick="answer(true)">Yes, this is me</button>
+      <button class="ans-btn" id="btn-no" onclick="answer(false)">Not really</button>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-back" onclick="goBack()" disabled>← Back</button>
+      <button class="nav-btn next-btn" id="btn-next" onclick="goNext()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <div class="result-screen" id="result-screen">
+    <div id="pattern-badge-wrap"></div>
+    <h2 class="result-head" id="result-head"></h2>
+    <p class="result-body" id="result-body"></p>
+    <div class="reframe">"You are not broken, you are patterned. Patterns can change."</div>
+    <div class="score-row" id="score-row"></div>
+    <div id="what-landed"></div>
+    <div class="cta-wrap">
+      <p class="cta-title">You just took the first step.</p>
+      <p class="cta-sub">The mini-course goes deeper into everything you just identified — what's actually running the show, how it got wired, and what you can do to start shifting it. Three modules. About 20 minutes each.</p>
+      <a class="cta-link cta-primary" href="https://www.somaticeducationforselfhealing.com/is-your-nervous-system-running-the-show" target="_blank">Start the mini-course — $27 →</a>
+      <p class="cta-sub">Not ready yet? The free 8 Signs guide goes deeper into what you just identified.</p>
+      <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/p/products/downloads" target="_blank">Get the free guide →</a>
+      <p class="cta-sub">Want to explore everything we offer?</p>
+      <a class="cta-link cta-tertiary" href="https://www.somaticeducationforselfhealing.com/courses-events" target="_blank">Browse courses & events →</a>
+      <button class="retake-link" onclick="retake()">← Retake the quiz</button>
+    </div>
+  </div>
+
+  <div class="footer-brand">The B.L.U.E. Method™ · Somatic Education for Self-Healing</div>
+</div>
+
+<script>
+var signs = [
+  { num:"01", text:"I overreact and I know it — but I can't stop it in the moment", detail:"The reaction is already in motion before you've consciously registered what's happening.", scores:{fight:2,flight:0,freeze:0,fold:0} },
+  { num:"02", text:"I'm exhausted in a way that sleep doesn't fix", detail:"A deeper tired. A system that's been running on alert for so long it's forgotten what settled feels like.", scores:{fight:1,flight:1,freeze:0,fold:0} },
+  { num:"03", text:"When things get heavy, I go somewhere else", detail:"Scrolling, spacing out, numbing out — feeling very little when you probably should feel something.", scores:{fight:0,flight:0,freeze:1,fold:1} },
+  { num:"04", text:"I understand exactly why I do this — and I still do it anyway", detail:"Knowing hasn't changed it. Because the pattern isn't stored in your thoughts.", scores:{fight:1,flight:1,freeze:1,fold:1} },
+  { num:"05", text:"I feel everything for everyone — but I don't know what I actually feel", detail:"Deeply attuned to everyone around you, but your own experience has gone quiet.", scores:{fight:1,flight:1,freeze:2,fold:1} },
+  { num:"06", text:"My mind won't stop spinning", detail:"The thoughts loop. The replaying. The what-ifs. This feels like a thinking problem. It isn't.", scores:{fight:1,flight:1,freeze:0,fold:0} },
+  { num:"07", text:"I can't get a handle on my health or my pain", detail:"Tension that won't release. Symptoms without a clean explanation. The body holds what the mind has moved on from.", scores:{fight:1,flight:1,freeze:1,fold:1} },
+  { num:"08", text:"I feel like I'm going through the motions", detail:"Present. Functional. Showing up. But not really here.", scores:{fight:1,flight:1,freeze:2,fold:2} }
+];
+
+var patterns = {
+  fight: {
+    label: "Fight response dominant",
+    head: "Your nervous system is running in Fight mode",
+    body: "Your system has learned to meet threat by pushing back — with intensity, urgency, and a readiness to engage that often fires before you've consciously decided to. This isn't aggression. It's a nervous system that learned early on that staying activated and alert was the safest way to navigate uncertainty. The overreaction you recognize in yourself isn't a character flaw. It's a protective response that once made sense — and is still running, even when the original threat is long gone. The work isn't to suppress the fire. It's to understand what it's protecting, and give it new conditions to work with."
+  },
+  flight: {
+    label: "Flight response dominant",
+    head: "Your nervous system is running in Flight mode",
+    body: "Your system has learned to stay in motion — to outrun what it can't face directly. The exhaustion that sleep doesn't fix, the mind that won't stop spinning, the constant doing — these aren't productivity or anxiety in the ordinary sense. They're a nervous system that learned that moving is safer than stopping. Stillness can feel dangerous when the system is wired this way. The body pays the price of all that running — in tension, in fatigue, in the vague sense that no matter how much you do, something is still unresolved. It is. And it lives in the body, not on the to-do list."
+  },
+  freeze: {
+    label: "Freeze response dominant",
+    head: "Your nervous system is running in Freeze mode",
+    body: "Your system has learned to go still when things get to be too much. Not calm — still. There's a difference. Freeze is the nervous system's response when fight and flight don't feel available — when the activation has nowhere to go, so it stops. The disconnection, the going-through-the-motions quality, the sense of being present but not really here — this is what freeze feels like from the inside. It's not depression, though it can look like it. It's a protective shutdown. A system that learned that disappearing was safer than being seen. The work is to create the conditions where it feels safe enough to come back."
+  },
+  fold: {
+    label: "Fold response dominant",
+    head: "Your nervous system is running in Fold mode",
+    body: "Your system has learned to collapse — to lose itself in the needs, emotions, and states of others as a way of staying connected and safe. Fold is what happens when the self contracts to make room for everyone else. You feel everything for everyone. You know what others need before they ask. And somewhere in all of that attunement, your own experience has gone quiet. This isn't empathy run amok. It's a nervous system that learned that having less need, taking up less space, and being whatever was needed was the way to stay safe in relationship. The work is to find yourself again — slowly, in the body, where you were always still there."
+  },
+  mixed: {
+    label: "Mixed pattern",
+    head: "Your nervous system is running a mixed pattern",
+    body: "Your results don't point clearly to one dominant response — which makes sense. Most nervous systems aren't purely one thing. They move between states depending on context, relationship, and what's being asked of them. You may find yourself in fight in some situations and freeze in others. Flight when the demand feels too high, fold when the relationship feels at stake. This isn't inconsistency. It's the nervous system doing what it was designed to do — adapting. The work is to develop enough awareness of which response is running in any given moment that you can begin to work with it, rather than be run by it."
+  }
+};
+
+var current = 0;
+var answers = [null,null,null,null,null,null,null,null];
+var viewport = document.getElementById('card-viewport');
+
+function buildCards() {
+  signs.forEach(function(s, i) {
+    var c = document.createElement('div');
+    c.className = 'q-card' + (i === 0 ? ' active' : '');
+    c.id = 'card-' + i;
+    c.innerHTML = '<div class="q-num">Sign ' + s.num + '</div><div class="q-text">' + s.text + '</div><div class="q-detail">' + s.detail + '</div>';
+    viewport.appendChild(c);
+  });
+}
+
+function updateUI() {
+  document.getElementById('prog-label').textContent = (current + 1) + ' of 8';
+  document.getElementById('pbar').style.width = Math.round((current / 8) * 100) + '%';
+  document.getElementById('btn-back').disabled = current === 0;
+  var ans = answers[current];
+  document.getElementById('btn-yes').className = 'ans-btn' + (ans === true ? ' sel-yes' : '');
+  document.getElementById('btn-no').className = 'ans-btn' + (ans === false ? ' sel-no' : '');
+  var btnNext = document.getElementById('btn-next');
+  btnNext.textContent = current === 7 ? 'See my results →' : 'Next →';
+  btnNext.disabled = ans === null;
+}
+
+function transitionTo(idx, dir) {
+  var active = document.querySelector('.q-card.active');
+  if (active) { active.className = 'q-card'; active.style.cssText = ''; }
+  var next = document.getElementById('card-' + idx);
+  next.style.transition = 'none';
+  next.style.transform = 'translateX(' + (dir === 1 ? '48px' : '-48px') + ')';
+  next.style.opacity = '0';
+  next.className = 'q-card active';
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      next.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+      next.style.transform = 'translateX(0)';
+      next.style.opacity = '1';
+    });
+  });
+}
+
+function answer(val) {
+  answers[current] = val;
+  updateUI();
+  if (current < 7) {
+    setTimeout(function() { current++; transitionTo(current, 1); updateUI(); }, 300);
+  } else {
+    setTimeout(function() { showResults(); }, 400);
+  }
+}
+
+function goNext() {
+  if (answers[current] === null) return;
+  if (current === 7) { showResults(); return; }
+  current++;
+  transitionTo(current, 1);
+  updateUI();
+}
+
+function goBack() {
+  if (current === 0) return;
+  current--;
+  transitionTo(current, -1);
+  updateUI();
+}
+
+function showResults() {
+  var totals = { fight:0, flight:0, freeze:0, fold:0 };
+  answers.forEach(function(a, i) {
+    if (a === true) {
+      var s = signs[i].scores;
+      totals.fight += s.fight;
+      totals.flight += s.flight;
+      totals.freeze += s.freeze;
+      totals.fold += s.fold;
+    }
+  });
+
+  var max = Math.max(totals.fight, totals.flight, totals.freeze, totals.fold);
+  var key = 'mixed';
+  if (max > 0) {
+    var dominant = ['fight','flight','freeze','fold'].filter(function(k) { return totals[k] === max; });
+    key = dominant.length === 1 ? dominant[0] : 'mixed';
+  }
+  var result = patterns[key];
+
+  document.getElementById('pattern-badge-wrap').innerHTML = '<div class="pattern-badge">' + result.label + '</div>';
+  document.getElementById('result-head').textContent = result.head;
+  document.getElementById('result-body').textContent = result.body;
+
+  var scoreRow = document.getElementById('score-row');
+  scoreRow.innerHTML = '';
+  ['fight','flight','freeze','fold'].forEach(function(k) {
+    var pill = document.createElement('div');
+    pill.className = 'score-pill' + (k === key ? ' dominant' : '');
+    pill.innerHTML = '<div class="score-pill-label">' + k.charAt(0).toUpperCase() + k.slice(1) + '</div><div class="score-pill-num">' + totals[k] + '</div>';
+    scoreRow.appendChild(pill);
+  });
+
+  var wl = document.getElementById('what-landed');
+  wl.innerHTML = '';
+  var yesses = answers.map(function(a,i){ return a===true?i:-1; }).filter(function(i){ return i>=0; });
+  if (yesses.length > 0) {
+    var lbl = document.createElement('p');
+    lbl.className = 'wl-label';
+    lbl.textContent = 'What landed for you:';
+    wl.appendChild(lbl);
+    yesses.forEach(function(i) {
+      var d = document.createElement('div');
+      d.className = 'wl-item';
+      d.innerHTML = '<div class="wl-dot"></div><span>' + signs[i].text + '</span>';
+      wl.appendChild(d);
+    });
+  }
+
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('pbar').style.width = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function retake() {
+  answers = [null,null,null,null,null,null,null,null];
+  current = 0;
+  document.querySelectorAll('.q-card').forEach(function(c){ c.className='q-card'; c.style.cssText=''; });
+  document.getElementById('card-0').className = 'q-card active';
+  updateUI();
+  document.getElementById('quiz-screen').style.display = 'block';
+  document.getElementById('result-screen').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildCards();
+updateUI();
+</script>
+
+</body>
+</html>
