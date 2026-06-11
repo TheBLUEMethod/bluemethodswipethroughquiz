@@ -139,9 +139,9 @@ body {
       <a class="cta-link cta-primary" href="https://www.somaticeducationforselfhealing.com/is-your-nervous-system-running-the-show" target="_blank">Start the mini-course &#8212; $27 &#8594;</a>
       <p class="cta-sub">Not ready yet? The free 8 Signs guide goes deeper into what you just identified.</p>
       <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/p/products/downloads" target="_blank">Get the free guide &#8594;</a>
-      <p class="cta-sub">Want to explore everything we offer?</p>
-      <a class="cta-link cta-tertiary" href="https://www.somaticeducationforselfhealing.com/courses-events" target="_blank">Browse courses &amp; events &#8594;</a>
-      <button class="retake-link" onclick="retake()">&#8592; Retake the quiz</button>
+      <p class="cta-sub">Ready to explore the full course series?</p>
+      <a class="cta-link cta-tertiary" href="https://www.somaticeducationforselfhealing.com/courses-events" target="_blank">Explore all courses &#8594;</a>
+      <a class="retake-link" href="https://www.somaticeducationforselfhealing.com" target="_blank">Learn more about The B.L.U.E. Method&#8482;</a>
     </div>
   </div>
 
@@ -236,6 +236,7 @@ function transitionTo(idx, dir) {
 }
 
 function answer(val) {
+  if (current > 7) return;
   answers[current] = val;
   updateUI();
   if (current < 7) {
@@ -250,6 +251,7 @@ function answer(val) {
 }
 
 function goNext() {
+  if (current > 7) return;
   if (answers[current] === null) return;
   if (current === 7) { showResults(); return; }
   current++;
@@ -259,6 +261,7 @@ function goNext() {
 
 function goBack() {
   if (current === 0) return;
+  if (current > 7) { current = 7; updateUI(); return; }
   current--;
   transitionTo(current, -1);
   updateUI();
