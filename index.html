@@ -66,17 +66,15 @@ body {
 .nav-btn:hover:not(:disabled) { border-color: #1D5E6C; color: #1D5E6C; }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 .result-screen { display: none; }
-.pattern-badge { display: inline-block; background: #E8F4F6; color: #1D5E6C; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; }
-.result-head { font-size: 21px; font-weight: 700; color: #2b323e; margin-bottom: 10px; line-height: 1.3; font-family: Georgia, serif; }
+.result-head { font-size: 21px; font-weight: 700; color: #2b323e; margin-bottom: 8px; line-height: 1.3; font-family: Georgia, serif; }
+.result-intro { font-size: 14px; color: #718096; line-height: 1.6; margin-bottom: 1.25rem; }
 .result-body { font-size: 15px; color: #4a5568; line-height: 1.7; margin-bottom: 1.25rem; }
 .reframe { border-left: 3px solid #1D5E6C; padding: 1rem 1.25rem; font-size: 15px; font-style: italic; color: #2b323e; line-height: 1.65; margin: 1.5rem 0; background: #f0f9fb; }
-.score-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin: 1.5rem 0; }
-.score-pill { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 8px; text-align: center; }
-.score-pill.dominant { background: #E8F4F6; border-color: #1D5E6C; }
-.score-pill-label { font-size: 11px; color: #718096; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.score-pill.dominant .score-pill-label { color: #1D5E6C; font-weight: 700; }
-.score-pill-num { font-size: 22px; font-weight: 700; color: #2b323e; font-family: Georgia, serif; }
-.score-pill.dominant .score-pill-num { color: #1D5E6C; }
+.pattern-bars { margin: 1.25rem 0 1.5rem; }
+.bar-row { margin-bottom: 12px; }
+.bar-name { font-size: 11px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.bar-track { height: 7px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 7px; border-radius: 4px; background: #1D5E6C; opacity: 0.65; }
 .wl-label { font-size: 13px; color: #718096; margin-bottom: 8px; margin-top: 1rem; }
 .wl-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; color: #2b323e; line-height: 1.5; }
 .wl-dot { width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: #1D5E6C; margin-top: 5px; }
@@ -97,7 +95,6 @@ body {
   .q-title { font-size: 20px; }
   .q-text { font-size: 15px; }
   .answer-row { grid-template-columns: 1fr; }
-  .score-pill-label { font-size: 10px; }
 }
 </style>
 </head>
@@ -123,18 +120,18 @@ body {
   </div>
 
   <div class="result-screen" id="result-screen">
-    <div id="pattern-badge-wrap"></div>
-    <h2 class="result-head" id="result-head"></h2>
+    <h2 class="result-head">Here&#8217;s what your nervous system showed us</h2>
+    <p class="result-intro">Most nervous systems carry more than one response. Here&#8217;s what showed up for you.</p>
+    <div class="pattern-bars" id="pattern-bars"></div>
     <p class="result-body" id="result-body"></p>
     <div class="reframe">&#8220;You are not broken, you are patterned. Patterns can change.&#8221;</div>
-    <div class="score-row" id="score-row"></div>
     <div id="what-landed"></div>
     <div class="cta-wrap">
       <p class="cta-title">You just took the first step.</p>
       <p class="cta-sub">The mini-course goes deeper into everything you just identified &#8212; what&#8217;s actually running the show, how it got wired, and what you can do to start shifting it. Three modules. About 20 minutes each.</p>
       <a class="cta-link cta-primary" href="https://www.somaticeducationforselfhealing.com/is-your-nervous-system-running-the-show" target="_blank">Start the mini-course &#8212; $27 &#8594;</a>
       <p class="cta-sub">Not ready yet? The free 8 Signs guide goes deeper into what you just identified.</p>
-      <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/p/products/8-signs-your-nervous-system-is-running-the-show" target="_blank">Get the free guide &#8594;</a>
+      <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/8-signs-your-nervous-system-is-running-the-show" target="_blank">Get the free guide &#8594;</a>
       <p class="cta-sub">Ready to explore the full course series?</p>
       <a class="cta-link cta-tertiary" href="https://www.somaticeducationforselfhealing.com/courses-events" target="_blank">Explore all courses &#8594;</a>
       <a class="retake-link" href="https://www.somaticeducationforselfhealing.com" target="_blank">Learn more about The B.L.U.E. Method&#8482;</a>
@@ -272,19 +269,20 @@ function showResults() {
     key = dominant.length === 1 ? dominant[0] : 'mixed';
   }
   var result = patterns[key];
-  document.getElementById('pattern-badge-wrap').innerHTML = '<div class="pattern-badge">' + result.label + '</div>';
-  document.getElementById('result-head').textContent = result.head;
   document.getElementById('result-body').textContent = result.body;
 
-  var scoreRow = document.getElementById('score-row');
-  scoreRow.innerHTML = '';
+  var maxScore = Math.max(totals.fight, totals.flight, totals.freeze, totals.fold);
+  var barsEl = document.getElementById('pattern-bars');
+  barsEl.innerHTML = '';
   var pkeys = ['fight','flight','freeze','fold'];
   for (var p = 0; p < pkeys.length; p++) {
     var pk = pkeys[p];
-    var pill = document.createElement('div');
-    pill.className = 'score-pill' + (pk === key ? ' dominant' : '');
-    pill.innerHTML = '<div class="score-pill-label">' + pk.charAt(0).toUpperCase() + pk.slice(1) + '</div><div class="score-pill-num">' + totals[pk] + '</div>';
-    scoreRow.appendChild(pill);
+    var pct = maxScore > 0 ? Math.round((totals[pk] / maxScore) * 100) : 0;
+    var row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = '<div class="bar-name">' + pk.charAt(0).toUpperCase() + pk.slice(1) + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%"></div></div>';
+    barsEl.appendChild(row);
   }
 
   var wl = document.getElementById('what-landed');
