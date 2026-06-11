@@ -65,9 +65,6 @@ body {
 }
 .nav-btn:hover:not(:disabled) { border-color: #1D5E6C; color: #1D5E6C; }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-.next-btn { background: #1D5E6C; color: white; border-color: #1D5E6C; font-size: 14px; padding: 10px 26px; font-weight: 600; }
-.next-btn:hover:not(:disabled) { opacity: 0.88; }
-.next-btn:disabled { background: #e2e8f0; border-color: #e2e8f0; color: #a0aec0; opacity: 1; cursor: not-allowed; }
 .result-screen { display: none; }
 .pattern-badge { display: inline-block; background: #E8F4F6; color: #1D5E6C; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; }
 .result-head { font-size: 21px; font-weight: 700; color: #2b323e; margin-bottom: 10px; line-height: 1.3; font-family: Georgia, serif; }
@@ -122,7 +119,6 @@ body {
     </div>
     <div class="nav-row">
       <button class="nav-btn" id="btn-back" onclick="goBack()" disabled>&#8592; Back</button>
-      <button class="nav-btn next-btn" id="btn-next" onclick="goNext()" disabled>Next &#8594;</button>
     </div>
   </div>
 
@@ -138,7 +134,7 @@ body {
       <p class="cta-sub">The mini-course goes deeper into everything you just identified &#8212; what&#8217;s actually running the show, how it got wired, and what you can do to start shifting it. Three modules. About 20 minutes each.</p>
       <a class="cta-link cta-primary" href="https://www.somaticeducationforselfhealing.com/is-your-nervous-system-running-the-show" target="_blank">Start the mini-course &#8212; $27 &#8594;</a>
       <p class="cta-sub">Not ready yet? The free 8 Signs guide goes deeper into what you just identified.</p>
-      <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/p/products/downloads" target="_blank">Get the free guide &#8594;</a>
+      <a class="cta-link cta-secondary" href="https://www.somaticeducationforselfhealing.com/8-signs-your-nervous-system-is-running-the-show" target="_blank">Get the free guide &#8594;</a>
       <p class="cta-sub">Ready to explore the full course series?</p>
       <a class="cta-link cta-tertiary" href="https://www.somaticeducationforselfhealing.com/courses-events" target="_blank">Explore all courses &#8594;</a>
       <a class="retake-link" href="https://www.somaticeducationforselfhealing.com" target="_blank">Learn more about The B.L.U.E. Method&#8482;</a>
@@ -210,9 +206,6 @@ function updateUI() {
   var ans = answers[current];
   document.getElementById('btn-yes').className = 'ans-btn' + (ans === true ? ' sel-yes' : '');
   document.getElementById('btn-no').className = 'ans-btn' + (ans === false ? ' sel-no' : '');
-  var btnNext = document.getElementById('btn-next');
-  btnNext.textContent = current === 7 ? 'See my results' : 'Next';
-  btnNext.disabled = (ans === null);
 }
 
 function transitionTo(idx, dir) {
@@ -248,15 +241,6 @@ function answer(val) {
   } else {
     setTimeout(function() { showResults(); }, 400);
   }
-}
-
-function goNext() {
-  if (current > 7) return;
-  if (answers[current] === null) return;
-  if (current === 7) { showResults(); return; }
-  current++;
-  transitionTo(current, 1);
-  updateUI();
 }
 
 function goBack() {
